@@ -1,0 +1,85 @@
+### Login
+POST http://localhost:5000/api/driver-applications
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary123456789
+
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="firstName"
+
+John
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="lastName"
+
+Doe
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="email"
+
+john.doe.test@example.com
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="phone"
+
+0821234567
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="dateOfBirth"
+
+1990-01-15
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="gender"
+
+Male
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="province"
+
+Gauteng
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="city"
+
+Johannesburg
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="address"
+
+123 Test Street, Johannesburg
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="licenseNumber"
+
+TEST123456
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="licenseExpiry"
+
+2030-01-15
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="pdpNumber"
+
+PDP123456
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="pdpExpiry"
+
+2030-01-15
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="drivingExperience"
+
+5
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="emergencyName"
+
+Jane Doe
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="emergencyRelationship"
+
+Sister
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="emergencyPhone"
+
+0829876543
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="agreeInformation"
+
+true
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="agreeBackground"
+
+true
+------WebKitFormBoundary123456789
+Content-Disposition: form-data; name="agreeTerms"
+
+true
+------WebKitFormBoundary123456789--
