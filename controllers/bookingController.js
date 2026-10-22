@@ -52,3 +52,20 @@ try{
   }
 
 }
+
+export const getBookings = async (req, res) => {
+     try { 
+        const customer_id = req.user.id; 
+        const bookings = await Booking.getBookingByCustomerId(customer_id);
+
+        return res.status(200).json({ bookings }); 
+
+    } catch (error) 
+    
+    { 
+        
+        console.error("Fetch customer bookings error:", error);
+        
+        return res.status(500).json({ message: "Failed to retrieve your bookings." }); 
+    } 
+};

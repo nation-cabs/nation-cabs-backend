@@ -1,7 +1,7 @@
 import express from "express";
 import {
     getDriverApplications,getPendingDriverApplications,approveDriverApplication,rejectDriverApplication,createDriverAccount
-    ,getDriverApplicationForReview,getDriverApplicationDocument
+    ,getDriverApplicationForReview,getDriverApplicationDocument,getRejectedDriverApplications,getApprovedDriverApplications
 } from "../controllers/hrController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import authorize from "../middleware/roleMiddleware.js";
@@ -38,6 +38,20 @@ router.post(
 );
 
 router.get(
+    "/driver-applications/approved",
+    getApprovedDriverApplications
+);
+
+router.get(
+    "/driver-applications/rejected",
+    getRejectedDriverApplications
+);
+
+
+
+
+
+router.get(
     "/driver-applications/:id",
      authMiddleware,
     authorize("hr"),
@@ -50,4 +64,7 @@ router.get(
     authorize("hr"),
     getDriverApplicationDocument
 );
+
+
+
 export default router;

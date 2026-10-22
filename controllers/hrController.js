@@ -104,9 +104,13 @@ export const getDriverApplicationForReview = async (req, res) => {
                 ? `${baseUrl}/uploads/${application.proof_of_address}`
                 : null,
 
-            profilePhoto: application.profile_photo
+            driverProfile: application.profile_photo
                 ? `${baseUrl}/uploads/${application.profile_photo}`
-                : null
+                : null,
+
+                cv: application.cv_document
+        ? `${baseUrl}/uploads/${application.cv_document}`
+        : null
         };
 
 
@@ -243,6 +247,7 @@ export const rejectDriverApplication = async (req, res) => {
             );
 
         if (!application) {
+        
 
             return res.status(404).json({
                 message: "Driver application not found."
@@ -404,7 +409,10 @@ export const getDriverApplicationDocument = async (req, res) => {
 
             "proof-of-address": "proof_of_address",
 
-            "profile-photo": "profile_photo"
+            "profile-photo": "profile_photo",
+            
+            cv: "cv_document"
+
 
         };
 
@@ -567,4 +575,56 @@ export const getDriverApplicationDocument = async (req, res) => {
 
     }
 
+};
+
+export const getRejectedDriverApplications = async (req, res) => {
+
+    try {
+
+        const applications =
+            await DriverApplication.getRejectedApplications();
+
+        res.status(200).json({
+            applications
+        });
+
+    } catch (error) {
+
+        console.error(
+            "GET REJECTED DRIVER APPLICATIONS ERROR:",
+            error
+        );
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
+export const getApprovedDriverApplications = async (req, res) => {
+
+    try {
+
+        const applications =
+            await DriverApplication.getApprovedApplications();
+
+        res.status(200).json({
+            applications
+        });
+
+    } catch (error) {
+
+        console.error(
+            "GET APPROVED DRIVER APPLICATIONS ERROR:",
+            error
+        );
+
+        res.status(500).json({
+            message:
+                "Failed to load approved applications."
+        });
+
+    }
 };

@@ -15,7 +15,10 @@ import hrRoutes from "./routes/hrRoutes.js";
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin:  ["http://localhost:5173",
+        "https://nationcabs.co.za",
+        "https://www.nationcabs.co.za"
+    ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true
 }));

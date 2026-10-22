@@ -108,8 +108,8 @@ export const createApplication = async (req, res) => {
             "proof-of-address"
         );
 
-        const profilePhoto = await uploadFile(
-            req.files?.profilePhoto?.[0],
+        const driverProfile = await uploadFile(
+            req.files?.driverProfile?.[0],
             "profile-photos"
         );
 
@@ -117,6 +117,10 @@ export const createApplication = async (req, res) => {
     req.files?.cv?.[0],
     "cvs"
 );
+
+console.log("CV FILE:", req.files?.cv?.[0]);
+console.log("CV DOCUMENT PATH:", cvDocument);
+
         // ========================================
         // CREATE DATABASE RECORD
         // ========================================
@@ -169,7 +173,7 @@ export const createApplication = async (req, res) => {
 
             proof_of_address: proofOfAddress,
 
-            profile_photo: profilePhoto,
+            profile_photo: driverProfile,
             
             cv_document: cvDocument,
 

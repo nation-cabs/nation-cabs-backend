@@ -43,6 +43,7 @@ class Booking {
         return this.getBookingById(id);
     }
 
+    
 
     static async getBookingById(id) {
 

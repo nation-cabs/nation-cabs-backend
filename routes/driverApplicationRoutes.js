@@ -18,12 +18,11 @@ const upload = multer({
             "licenseDocument",
             "pdpDocument",
             "proofOfAddress",
-            "cv"
+            "cv",
+            "driverProfile"
         ];
 
-        const imageFields = [
-            "profilePhoto"
-        ];
+       
 
 
         // ========================================
@@ -127,7 +126,7 @@ router.post(
             maxCount: 1
         },
         {
-            name: "profilePhoto",
+            name: "driverProfile",
             maxCount: 1
         },
          { name: "cv",

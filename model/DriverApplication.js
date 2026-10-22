@@ -225,7 +225,8 @@ class DriverApplication {
             application_status = 'rejected',
             admin_notes = ?,
             updated_at = CURRENT_TIMESTAMP
-         WHERE id = ?`,
+         WHERE id = ?
+         AND application_status = 'pending'`,
         [
             adminNotes || null,
             id
@@ -422,6 +423,29 @@ class DriverApplication {
     }
 }
 
+static async getRejectedApplications() {
+
+    const [rows] = await pool.execute(
+        `SELECT *
+         FROM driver_applications
+         WHERE application_status = 'rejected'
+         ORDER BY created_at DESC`
+    );
+
+    return rows;
+}
+
+static async getApprovedApplications() {
+
+    const [rows] = await pool.execute(
+        `SELECT *
+         FROM driver_applications
+         WHERE application_status = 'approved'
+         ORDER BY created_at DESC`
+    );
+
+    return rows;
+}
 }
 
 export default DriverApplication;
