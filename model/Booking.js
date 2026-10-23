@@ -181,6 +181,26 @@ class Booking {
 
         return this.getBookingById(id);
     }
+
+    
+static async cancelBooking(id, customerId) {
+  const [result] = await pool.execute(
+    `UPDATE bookings
+     SET booking_status = 'Cancelled',
+         updated_at = CURRENT_TIMESTAMP
+     WHERE id = ?
+       AND customer_id = ?
+       AND LOWER(booking_status) IN ('pending', 'confirmed')`,
+    [id, customerId]
+  );
+
+  if (result.affectedRows === 0) {
+    return null;
+  }
+
+  return this.getBookingById(id);
+}
+
 }
 
 export default Booking;

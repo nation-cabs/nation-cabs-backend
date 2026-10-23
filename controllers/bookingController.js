@@ -69,3 +69,57 @@ export const getBookings = async (req, res) => {
         return res.status(500).json({ message: "Failed to retrieve your bookings." }); 
     } 
 };
+
+
+export const cancelCustomerBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const customerId = req.user?.id;
+
+    if (!customerId) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required.",
+      });
+    }
+
+    const existingBooking = await Booking.getBookingById(id);
+
+    if (!existingBooking) {
+      return res.status(404).json({
+        success: false,
+        message: "Booking not found.",
+      });
+    }
+
+    if (existingBooking.customer_id !== customerId) {
+      return res.status(403).json({
+        success: false,
+        message: "You cannot cancel another customer's booking.",
+      });
+    }
+
+    const updatedBooking = await Booking.cancelBooking(id, customerId);
+
+    if (!updatedBooking) {
+      return res.status(409).json({
+        success: false,
+        message:
+          "This booking cannot be cancelled because its status does not permit cancellation.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Ride cancelled successfully.",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error cancelling booking:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to cancel ride.",
+    });
+  }
+};
